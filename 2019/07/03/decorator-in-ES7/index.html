@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="1 decorator是什么装饰器，顾名思义，就是用一段代码包裹另一段代码，类似于函数组装(functional composition)或高阶函数(higher-order functions).">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="decorator in ES7">
+<meta property="og:url" content="http://yoursite.com/2019/07/03/decorator-in-ES7/index.html">
+<meta property="og:site_name" content="时光之旅">
+<meta property="og:description" content="1 decorator是什么装饰器，顾名思义，就是用一段代码包裹另一段代码，类似于函数组装(functional composition)或高阶函数(higher-order functions).">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-20T10:21:33.964Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="decorator in ES7">
+<meta name="twitter:description" content="1 decorator是什么装饰器，顾名思义，就是用一段代码包裹另一段代码，类似于函数组装(functional composition)或高阶函数(higher-order functions).">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/07/03/decorator-in-ES7/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>decorator in ES7 | 时光之旅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">时光之旅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">time line</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/decorator-in-ES7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jiang jialin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="时光之旅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">decorator in ES7
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-03 10:46:13" itemprop="dateCreated datePublished" datetime="2019-07-03T10:46:13+08:00">2019-07-03</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-20 18:21:33" itemprop="dateModified" datetime="2019-07-20T18:21:33+08:00">2019-07-20</time>
+              </span>
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-decorator是什么"><a href="#1-decorator是什么" class="headerlink" title="1 decorator是什么"></a>1 decorator是什么</h2><p>装饰器，顾名思义，就是用一段代码包裹另一段代码，类似于<code>函数组装(functional composition)</code>或<code>高阶函数(higher-order functions)</code>.</p>
+<a id="more"></a>
+
+<h2 id="2-为什么要用decorator"><a href="#2-为什么要用decorator" class="headerlink" title="2 为什么要用decorator"></a>2 为什么要用decorator</h2><p>在讨论为什么要用decorator之前，我们需要介绍两个概念，以及这两个概念背后的模式，以便进行对比。</p>
+<blockquote>
+<blockquote>
+<p>通常来说，选择一样东西，我们需要与其他东西进行对比，综合分析各自的优劣，找出自己心目中最好的那个。如果你选择的恰巧也被大多数人认可，那么恭喜你，你的选择即将成为标准，载入史册。–我的方法论，哈哈哈</p>
+</blockquote>
+</blockquote>
+<p>下面，本文就对<code>functional composition</code>以及<code>higher-order functions</code>进行简要介绍。</p>
+<h3 id="2-1-Function-Composition"><a href="#2-1-Function-Composition" class="headerlink" title="2.1 Function Composition"></a>2.1 Function Composition</h3><p>函数组装，是一个数学上的概念，它所描述的是我们可以将两个或两个以上的函数组装成一个函数。</p>
+<p>函数组装的关键是有一个可以被组合的函数，这个函数需要有1个输入参数和1个输出值。我们可以通过函数柯里化（currying）将任意一个函数转变为可组装的函数。</p>
+<p>函数组装解决的是一般形式的嵌套问题，比如有这样的一种函数调用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listGroupTag (listGroupItems (items))</span><br></pre></td></tr></table></figure>
+
+<p>通过函数组装，可以变为下面的形式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compose(listGroupTag, listGroupItems)(items)</span><br></pre></td></tr></table></figure>
+
+<p>两个函数似乎看不出什么优势，但是多个函数嵌套的情况下，就能够显现出<code>compose</code>函数的优势了，比如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 普通调用，多个嵌套，眼花缭乱</span></span><br><span class="line"><span class="comment">// 多个括号让胃里翻腾</span></span><br><span class="line">A(B(C(D(data))))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过函数组装调用，清晰明了</span></span><br><span class="line">compose(A, B, C, D)(data)</span><br></pre></td></tr></table></figure>
+
+<p>这里函数是按照：D -&gt; C -&gt; B -&gt; A的顺序执行的，如果希函数按照：A -&gt; B -&gt; C -&gt; D 的顺序执行，则可以定义一个<code>pipe</code>函数，使其作为参数的函数从左到右执行，如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A -&gt; B -&gt; C -&gt; D</span></span><br><span class="line">pipe(A, B, C, D)(data)</span><br></pre></td></tr></table></figure>
+
+<p>两个函数的实现方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> compose = <span class="function">(<span class="params">...functions</span>) =&gt;</span> <span class="function"><span class="params">data</span> =&gt;</span></span><br><span class="line">  functions.reduceRight(<span class="function">(<span class="params">value, func</span>) =&gt;</span> func(value), data)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> pipe = <span class="function">(<span class="params">...functions</span>) =&gt;</span> <span class="function"><span class="params">data</span> =&gt;</span></span><br><span class="line">  functions.reduce(<span class="function">(<span class="params">value, func</span>) =&gt;</span> func(value), data)</span><br></pre></td></tr></table></figure>
+
+<p>要想详细了解函数组装，可以看<a href="https://hackernoon.com/javascript-functional-composition-for-every-day-use-22421ef65a10" target="_blank" rel="noopener">这里</a></p>
+<h3 id="2-2-高阶函数"><a href="#2-2-高阶函数" class="headerlink" title="2.2 高阶函数"></a>2.2 高阶函数</h3><p>一个函数，可以接收另一个函数作为参数，这种函数称之为高阶函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Hello, '</span> + name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loggingDecorator</span>(<span class="params">wrapped</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Starting'</span>);</span><br><span class="line">    <span class="keyword">const</span> result = wrapped.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Finished'</span>);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> wrapped = loggingDecorator(doSomething);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-比较"><a href="#2-3-比较" class="headerlink" title="2.3 比较"></a>2.3 比较</h3><p>通过函数组合与高阶函数，我们似乎已经可以把函数组织的很好了，但是为什还需要<code>decorator</code>呢？这主要是由于class与class properties的出现，让类似于这样的组合变得异常困难，decorator可以解决这样的问题。</p>
+<p>还有一点，decorator可以使代码变得更为整洁和直观，这也是我们选择decorator的一个原因。</p>
+<h2 id="3-如何使用decorator"><a href="#3-如何使用decorator" class="headerlink" title="3 如何使用decorator"></a>3 如何使用decorator</h2><p>装饰器的语法比较特殊，它由<code>@</code>符号作为前缀，放在被装饰代码的前面。<br>可以根据需要在同一段代码上使用尽可能多的装饰器，并且它们将按照声明的顺序依次执行。<br><strong>装饰器的执行时机是在代码的编译阶段，而不是运行阶段。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@log()</span><br><span class="line">@immutable()</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Example</span> </span>&#123;</span><br><span class="line">  @time(<span class="string">'demo'</span>)</span><br><span class="line">  doSomething() &#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由以上例子可知，装饰器可以用在两个地方，对<code>类</code>的装饰以及对<code>类方法</code>的装饰，它看起来是对ES6中类的一种附加产物，只在类中生效，那这两中写法有哪些不同呢？</p>
+<p>他们的不同之处在于实现decorator时传的参数不同，我们分别通过例子进行对比。</p>
+<h3 id="3-1-装饰类的装饰器"><a href="#3-1-装饰类的装饰器" class="headerlink" title="3.1 装饰类的装饰器"></a>3.1 装饰类的装饰器</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@testable</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTestableClass</span> </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">testable</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">  target.isTestable = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyTestableClass.isTestable <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p><code>testable</code>函数接收一个参数<code>target</code>，它是<code>MyTestableClass</code>类本身，我们可以通过操作<code>target</code>从而给类增加一些功能，在上面的例子中，我们给<code>MyTestableClass</code>增加了一个属性叫<code>isTestable</code>并赋值为<code>true</code>。</p>
+<h3 id="3-2-装饰方法的装饰器"><a href="#3-2-装饰方法的装饰器" class="headerlink" title="3.2 装饰方法的装饰器"></a>3.2 装饰方法的装饰器</h3><p>对方法的装饰与对类的装饰有所不同，表现在接收参数的不同，我们来看一个例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dec</span>(<span class="params">target, name, descriptor</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> fun = descriptor.value;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// descriptor.value = function() &#123;</span></span><br><span class="line">  <span class="comment">//   alert(222);</span></span><br><span class="line">  <span class="comment">//   fun();</span></span><br><span class="line">  <span class="comment">// &#125;;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    value: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      alert(<span class="number">222</span>);</span><br><span class="line">      fun();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  @dec</span><br><span class="line">  onClick() &#123;</span><br><span class="line">    alert(<span class="number">111</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> &lt;button onClick=&#123;this.onClick&#125;&gt;点我点我&lt;/button&gt;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从上面的代码片段可以看出，修饰方法的装饰器接收三个参数，第一个参数<code>target</code>代表函数所在类的<code>prototype</code>，即<code>A.prototype</code>，第二个参数代表所修饰方法的名称，这里即传入<code>&quot;onClick&quot;</code>，第三个参数代表属性描述符。</p>
+<p>这里需要注意的是<strong>返回值</strong>，我们可以返回一个对象，这个对象会自动替换掉原<code>descriptor</code>的属性，上面的例子就把原<code>descriptor</code>的<code>value</code>值替换成了新值。同时，我们也可以直接修改原<code>descriptor</code>的值，就像代码中注释的那段一样。</p>
+<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4 总结"></a>4 总结</h3><p>本文首先介绍了什么是装饰器，然后又说明为什么要用装饰器，它到底有哪些优势，最后总结了装饰器应用的场景，以及如何编写装饰器。其实知道了这些，已经可以应付大多数业务场景了，但是不免会出现特殊情况，本文没有介绍。</p>
+<p>下一篇，我会结合在业务中遇到的问题，向大家介绍当遇到需要装饰属性时的处理方式，既给属性编写装饰器。</p>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/19/zepto源码/" rel="next" title="zepto 框架结构">
+                <i class="fa fa-chevron-left"></i> zepto 框架结构
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/03/判断函数new调用/" rel="prev" title="判断函数new调用">
+                判断函数new调用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+  <p class="site-author-name" itemprop="name">Jiang jialin</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-decorator是什么"><span class="nav-number">1.</span> <span class="nav-text">1 decorator是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-为什么要用decorator"><span class="nav-number">2.</span> <span class="nav-text">2 为什么要用decorator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Function-Composition"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Function Composition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-高阶函数"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 高阶函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-比较"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-如何使用decorator"><span class="nav-number">3.</span> <span class="nav-text">3 如何使用decorator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-装饰类的装饰器"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 装饰类的装饰器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-装饰方法的装饰器"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 装饰方法的装饰器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-总结"><span class="nav-number">3.3.</span> <span class="nav-text">4 总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiang jialin</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

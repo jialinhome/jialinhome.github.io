@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="最近学习了一下浏览器从收HTML文档到渲染出页面的过程，在此做一下记录。">
+<meta name="keywords" content="浏览器渲染相关">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css与js对浏览器渲染的影响">
+<meta property="og:url" content="http://yoursite.com/2018/11/01/css与js对浏览器渲染的影响/index.html">
+<meta property="og:site_name" content="时光之旅">
+<meta property="og:description" content="最近学习了一下浏览器从收HTML文档到渲染出页面的过程，在此做一下记录。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2018/11/01/5bdac92c1e3de.png">
+<meta property="og:image" content="https://i.loli.net/2018/11/02/5bdbbcecc57d1.png">
+<meta property="og:image" content="https://i.loli.net/2018/11/02/5bdbc1838d74d.png">
+<meta property="og:image" content="https://i.loli.net/2018/11/02/5bdbf5f590d2d.png">
+<meta property="og:image" content="https://i.loli.net/2018/11/02/5bdbfdd80bc9d.png">
+<meta property="og:updated_time" content="2019-07-20T10:21:33.968Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="css与js对浏览器渲染的影响">
+<meta name="twitter:description" content="最近学习了一下浏览器从收HTML文档到渲染出页面的过程，在此做一下记录。">
+<meta name="twitter:image" content="https://i.loli.net/2018/11/01/5bdac92c1e3de.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2018/11/01/css与js对浏览器渲染的影响/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>css与js对浏览器渲染的影响 | 时光之旅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">时光之旅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">time line</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/css与js对浏览器渲染的影响/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jiang jialin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="时光之旅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">css与js对浏览器渲染的影响
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-01 14:28:02" itemprop="dateCreated datePublished" datetime="2018-11-01T14:28:02+08:00">2018-11-01</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-20 18:21:33" itemprop="dateModified" datetime="2019-07-20T18:21:33+08:00">2019-07-20</time>
+              </span>
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近学习了一下浏览器从收HTML文档到渲染出页面的过程，在此做一下记录。</p>
+<a id="more"></a>
+
+<h2 id="浏览器从接收HTML到渲染出页面的过程"><a href="#浏览器从接收HTML到渲染出页面的过程" class="headerlink" title="浏览器从接收HTML到渲染出页面的过程"></a>浏览器从接收HTML到渲染出页面的过程</h2><ol>
+<li>解析HTML文档形成<code>DOM (Document Object Model)</code>树</li>
+<li>解析CSS文档形成<code>CSSOM (CSS Object Model)</code>树</li>
+<li>将CSSOM与DOM树结合形成<code>渲染树 (render tree)</code></li>
+<li>根据渲染树进行<code>布局</code>，确定每个节点的几何信息（位置与大小等）</li>
+<li>将各个节点绘制到屏幕上</li>
+</ol>
+<p>注意：</p>
+<pre><code>如果在渲染期间，DOM或CSSOM被改变，需要重复此过程从而计算出哪些像素需要重新渲染。</code></pre><p>渲染树</p>
+<pre><code>渲染树包含屏幕上所有可见内容的内容和样式信息。</code></pre><p>布局</p>
+<pre><code>渲染树在创建完成时，树里的节点并不包含位置和大小信息。计算这些值的过程称为布局或重排。</code></pre><h2 id="DOM树构建过程"><a href="#DOM树构建过程" class="headerlink" title="DOM树构建过程"></a>DOM树构建过程</h2><p>字节(Bytes) → 字符(Characters) → 令牌(tokens) → 节点(nodes) → 对象模型(object model)。</p>
+<h2 id="渲染树与DOM树的关系"><a href="#渲染树与DOM树的关系" class="headerlink" title="渲染树与DOM树的关系"></a>渲染树与DOM树的关系</h2><p>渲染树与DOM树是相对的，但并非一一对应。</p>
+<ol>
+<li><p>非可视化DOM不会插入到渲染树中（如head元素，display值为none的元素等，visibility的元素会占据空间，因此会插入到渲染树中）</p>
+</li>
+<li><p>有一些DOM元素对应多个可视对象（如select元素有3个呈现对象，一个显示区域，一个下拉列表，一个按钮）</p>
+</li>
+<li><p>有一些呈现对象对应于DOM节点，但在渲染树中的位置与DOM树中的不同（浮动定位和绝对定位的元素就是这样，它们处于正常的流程之外，放置在树中的其他地方，并映射到真正的框架，而放在原位的是占位框架。）</p>
+</li>
+</ol>
+<h2 id="阻塞渲染的CSS"><a href="#阻塞渲染的CSS" class="headerlink" title="阻塞渲染的CSS"></a>阻塞渲染的CSS</h2><p>默认情况下，CSS被视为阻塞渲染的资源（注意：这里的渲染指的是渲染树的构建），因为只有同时存在DOM和CSSOM才能构建渲染树。</p>
+<p>但是这里有一个疑问，CSS会不会阻塞DOM树的构建呢？</p>
+<p>我们做如下实验：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">            body &#123;</span><br><span class="line">                background: #31b0d5;</span><br><span class="line">                font-size: 18px;</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"/css/common.css"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h1</span>&gt;</span>test<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Coding is fantastic<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>fantastic<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>以上代码不包括js脚本，但同时具有内部css及外部css引用，经过Chrome DevTools分析，得到下图：</p>
+<p><img src="https://i.loli.net/2018/11/01/5bdac92c1e3de.png" alt="不包含CSS"></p>
+<p>由图可以看出，内部css及外部CSS的加载及解析都没有阻塞HTML的解析及DOM树的构建。由此表明，在没有js参与的情况下，CSS不会阻塞HTML的解析及DOM树的构建。</p>
+<h2 id="阻塞DOM构建的js"><a href="#阻塞DOM构建的js" class="headerlink" title="阻塞DOM构建的js"></a>阻塞DOM构建的js</h2><p>javascript脚本在文档何处插入，就在文档何处执行，当HTML遇到一个javascript标记时，它会暂停构建DOM，将控制权移交给javascript引擎，等javascript执行完毕，浏览器会从中断的地方恢复DOM构建。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/js/blok.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>test<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Coding is fantastic<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>fantastic<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2018/11/02/5bdbbcecc57d1.png" alt="外链js"></p>
+<p>由上图可以看出，HTML文档解析过程中遇到外链js标签，停止了js的解析，开始下载js文件并执行，执行之后继续HTML解析。</p>
+<p>但也有例外情况，即外部脚本标签带有defer或async属性。</p>
+<ul>
+<li>带有defer属性</li>
+</ul>
+<p>对于defer，js的加载会与文档解析并行执行，可以理解为将外部js放在了文档的底部，等文档解析完成后，defer会按照原本的js放置的顺序执行，对js的前后依赖关系没有影响。</p>
+<p>对上面的代码稍作改动：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/js/blok.js"</span> <span class="attr">defer</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2018/11/02/5bdbc1838d74d.png" alt="外链js"></p>
+<p>给script标签加上defer属性后，HTML文档的解析及脚本的执行顺序如上图所示。从图中可以看出，HTML的解析没有被阻塞，js脚本在<code>DOMConentLoaded</code>事件触发之前执行完毕。</p>
+<p>《javascript高级程序设计》对defer的解释：</p>
+<pre><code>HTML5规范要求defer脚本按照他们出现的先后顺序执行，并且先于DOMContentLoaded事件执行。
+但在现实当中，延迟脚本不一定会按照顺序执行，也不一定会在DOMContentLoaded事件触发前执行，
+因此最好只包含一个延时脚本。</code></pre><p>关于<code>DOMConentLoaded</code>事件</p>
+<pre><code>DOMConentLoaded事件在HTML被完全加载和解析之后触发，而无需等待样式表、图像和子框架的加载。</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.info(<span class="string">"DOM loaded"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// `DOMContentLoaded` may fire before your script has a chance to run, so check before adding a listener</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">document</span>.readyState === <span class="string">"loading"</span>) &#123;</span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">"DOMContentLoaded"</span>, doSomething);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;  <span class="comment">// `DOMContentLoaded` already fired</span></span><br><span class="line">    doSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>带有async属性（HTML5）</li>
+</ul>
+<p>对于async，js的加载会与文档解析并行执行，一旦js加载好了，会立即执行js文件，停止文档解析，由于js的异步加载返回时间不确定，所以js可能不是按照原本顺序执行，如果有依赖，可能会出错。异步脚本一定在页面的load事件前执行，但可能会在DOMContentLoaded事件之前或之后执行。</p>
+<h2 id="当文档中既有js又有CSS，对CSSOM构建的影响"><a href="#当文档中既有js又有CSS，对CSSOM构建的影响" class="headerlink" title="当文档中既有js又有CSS，对CSSOM构建的影响"></a>当文档中既有js又有CSS，对CSSOM构建的影响</h2><p>前面两部分说明了css对渲染树构建的影响及js对DOM树构建的影响，那js对CSSOM树的构建有没有影响呢？</p>
+<ol>
+<li>js在前，css在后的情况</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/js/blok.js"</span> <span class="attr">defer</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"/css/common.css"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>test<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Coding is fantastic<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>fantastic<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2018/11/02/5bdbf5f590d2d.png" alt="js在前，css在后"></p>
+<p>上面的例子中，引入一个外部js和一个外部css文件，js在css上面，从图中可以看出，js比css先加载完成。js加载完成后开始执行，在js的执行过程中，css也加载完成了，但此时并没有立即进入css的解析，而是等待js的执行，js执行后，继续HTML的解析，然后再解析css，最后进行渲染树构建。</p>
+<ol start="2">
+<li>css在前，js在后</li>
+</ol>
+<p>对上例代码稍作改动，将外部css文件的引用放到js上面，得到如下的分析图：</p>
+<p><img src="https://i.loli.net/2018/11/02/5bdbfdd80bc9d.png" alt="css在前，js在后"></p>
+<p>图中可以看出，css文件要先于js文件进行加载，并晚于js文件加载完成。但浏览器并没有提前执行js文件，而是等待css文件加载并解析完成后，才执行已经加载好的js的执行.</p>
+<p>对于以上两种情况，得出如下结论：</p>
+<p>对于既有js又有css的情况，如果js在css前面，CSSOM会等到js执行后进行构建，不会打断js的执行，如果js在css后面，CSSOM会先进行构建，构建完毕后再执行js，js不会打断CSSOM的构建。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文从浏览器接收到HTML文档到渲染出页面的过程为出发点，逐步对该过程的一些概念和一些知识点做了阐述，主要包括一下几个方面：</p>
+<ol>
+<li>阐述了现代浏览器渲染出文档的过程，并对其中的一些关键术语进行了说明；</li>
+<li>对CSS阻塞渲染树的构建进行实验；</li>
+<li>对js阻塞DOM树的构建进行了实验，并且对<code>defer</code>及<code>async</code>属性进行了对比，主要对比了二者的加载及执行时机，并且对带有这两个标签的javascript文件的执行与<code>DOMContentLoaded</code>事件触发的先后顺序进行了说明；</li>
+<li>最后，对于既有外部js又有css的情况进行了实验，对比出了两种情况下的差异。</li>
+</ol>
+<p>本文的实验部分都是基于Chrome 69版本，其他浏览器情况没做深入调查，因此可能结论存在偏差，如有不妥之处，欢迎指正（<a href="mailto:jjlin2015@163.com" target="_blank" rel="noopener">jjlin2015@163.com</a>）。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/" target="_blank" rel="noopener">浏览器的工作原理：新式网络浏览器幕后揭秘</a></p>
+<p><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/constructing-the-object-model?hl=zh-cn" target="_blank" rel="noopener">构建对象模型</a></p>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/浏览器渲染相关/" rel="tag"># 浏览器渲染相关</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/13/你不知道的javascript（上卷）读书笔记/" rel="next" title="《你不知道的javascript（上卷）》读书笔记">
+                <i class="fa fa-chevron-left"></i> 《你不知道的javascript（上卷）》读书笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/07/HTTP-缓存/" rel="prev" title="HTTP 缓存">
+                HTTP 缓存 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+  <p class="site-author-name" itemprop="name">Jiang jialin</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器从接收HTML到渲染出页面的过程"><span class="nav-number">1.</span> <span class="nav-text">浏览器从接收HTML到渲染出页面的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM树构建过程"><span class="nav-number">2.</span> <span class="nav-text">DOM树构建过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渲染树与DOM树的关系"><span class="nav-number">3.</span> <span class="nav-text">渲染树与DOM树的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻塞渲染的CSS"><span class="nav-number">4.</span> <span class="nav-text">阻塞渲染的CSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阻塞DOM构建的js"><span class="nav-number">5.</span> <span class="nav-text">阻塞DOM构建的js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#当文档中既有js又有CSS，对CSSOM构建的影响"><span class="nav-number">6.</span> <span class="nav-text">当文档中既有js又有CSS，对CSSOM构建的影响</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">8.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jiang jialin</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
