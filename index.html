@@ -1,2189 +1,587 @@
-<!DOCTYPE html>
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<html class="theme-next mist use-motion" lang="zh-CN">
+<!DOCTYPE HTML>
+<html>
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
-
-<link rel="stylesheet" href="/css/main.css?v=7.2.0">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
-
-
-
-
-
-
-
-<script id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Mist',
-    version: '7.2.0',
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
-    fancybox: false,
-    fastclick: false,
-    lazyload: false,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    translation: {
-      copy_button: '复制',
-      copy_success: '复制成功',
-      copy_failure: '复制失败'
-    }
-  };
-</script>
-
-  <meta property="og:type" content="website">
-<meta property="og:title" content="时光之旅">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="时光之旅">
-<meta property="og:locale" content="zh-CN">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="时光之旅">
-
-
-
-
+  <meta charset="utf-8">
+  
+  <title>时光之旅 | time line</title>
 
   
-  
-  <link rel="canonical" href="http://yoursite.com/">
-
-
-
-<script id="page.configurations">
-  CONFIG.page = {
-    sidebar: "",
-  };
-</script>
-
-  
-  <title>时光之旅</title>
+  <meta name="author" content="Jiang jialin">
   
 
+  
 
+  
 
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
+  
 
+  <meta property="og:site_name" content="时光之旅">
 
+  
+  <meta property="og:image" content="/favicon.ico">
+  
 
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .motion-element,
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
-
-  .use-motion .logo,
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="时光之旅" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
-  
-  
-    
-  
+<body>
+<div class="blog">
+  <div class="content">
 
-  <div class="container sidebar-position-left 
-  page-home">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">时光之旅</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-    
-      
-        <p class="site-subtitle">time line</p>
-      
-    
-    
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">时光之旅</a>
+    </h1>
+    <p class="site-description">time line</p>
   </div>
-
-  <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  
-    <ul id="menu" class="menu">
+  <nav class="site-navigation">
+    <ul>
       
-        
-        
-        
-          
-          <li class="menu-item menu-item-home menu-item-active">
-
-    
-    
+        <li><a href="/">主页</a></li>
       
-    
-
-    
-
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
-
-  </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-
-    
-    
-      
-    
-
-    
-
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
-
-  </li>
-
-      
+        <li><a href="/archives">归档</a></li>
       
     </ul>
-  
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    
+  <article>
 
   
     
-
-  
-
-  
-</nav>
-
-
-
-</div>
-    </header>
-
+    <h3 class="article-title"><a href="/2019/07/30/Array-reduce/"><span>Array.reduce</span></a></h3>
     
-
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-          <div id="content" class="content">
-            
-  <section id="posts" class="posts-expand">
-    
-      
-
   
 
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/19/jsonp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jiang jialin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/07/30/Array-reduce/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-07-30T03:28:23.000Z">
+          2019-07-30
+        </time>
+      </a>
     </span>
+  </div>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="时光之旅">
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>话说这个<code>Array.reduce</code>，真的是一生之敌，不经常用，用到的时候就忘了，还有<code>Array.splice</code>、<code>Array.slice</code>，这些函数的功能都比较容易记住，但里边回调函数的参数真的不太容易背下来，每次都要去看文档查询，所以还是在这里写一写，再次用到的时候来这里查。</p>
+<p>这个<code>reduce</code>只是一个壳，重要的是里边的回调函数，回调函数会对数组的每一项进行处理，然后汇总成一个值返回。</p>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/javascript/">javascript</a>
     </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/19/jsonp/" class="post-title-link" itemprop="url">jsonp</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-19 17:12:38" itemprop="dateCreated datePublished" datetime="2019-07-19T17:12:38+08:00">2019-07-19</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-20 18:21:33" itemprop="dateModified" datetime="2019-07-20T18:21:33+08:00">2019-07-20</time>
-              </span>
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+    </div>
 
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2019/07/19/jsonp/"><span>jsonp</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/07/19/jsonp/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-07-19T09:12:38.000Z">
+          2019-07-19
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
       
-      
-
-      
-        
-          <h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><ol>
+        <h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><ol>
 <li>跨域属于浏览器的安全限制，跟服务器无关</li>
 <li>同源–协议、域名、端口号相同</li>
 <li>浏览器允许拥有src属性的元素跨域访问资源，如：<code>&lt;script&gt;，&lt;img&gt;，&lt;iframe&gt;</code>等</li>
 </ol>
 <p>所以，可以使用JSONP跨域访问数据。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/07/19/jsonp/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
       
     </div>
 
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
 
+  <div class="article-footer">
+    <div class="article-meta pull-left">
 
     
-      
 
-  
+    
+    
 
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/判断函数new调用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jiang jialin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/javascript/">javascript</a>
     </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="时光之旅">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/03/判断函数new调用/" class="post-title-link" itemprop="url">判断函数new调用</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-03 17:44:44" itemprop="dateCreated datePublished" datetime="2019-07-03T17:44:44+08:00">2019-07-03</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-20 18:21:33" itemprop="dateModified" datetime="2019-07-20T18:21:33+08:00">2019-07-20</time>
-              </span>
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>先看一下ES6下class被babel转义的情景。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/07/03/判断函数new调用/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
     </div>
 
     
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
+</article>
 
 
+
+  <article>
+
+  
     
-      
-
+    <h3 class="article-title"><a href="/2019/07/03/判断函数new调用/"><span>判断函数new调用</span></a></h3>
+    
   
 
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/03/decorator-in-ES7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jiang jialin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/07/03/判断函数new调用/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-07-03T09:44:44.000Z">
+          2019-07-03
+        </time>
+      </a>
     </span>
+  </div>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="时光之旅">
-    </span>
 
-    
-      <header class="post-header">
+  
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/03/decorator-in-ES7/" class="post-title-link" itemprop="url">decorator in ES7</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-03 10:46:13" itemprop="dateCreated datePublished" datetime="2019-07-03T10:46:13+08:00">2019-07-03</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-20 18:21:33" itemprop="dateModified" datetime="2019-07-20T18:21:33+08:00">2019-07-20</time>
-              </span>
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+  <div class="article-content">
+    <div class="entry">
       
-      
-
-      
-        
-          <h2 id="1-decorator是什么"><a href="#1-decorator是什么" class="headerlink" title="1 decorator是什么"></a>1 decorator是什么</h2><p>装饰器，顾名思义，就是用一段代码包裹另一段代码，类似于<code>函数组装(functional composition)</code>或<code>高阶函数(higher-order functions)</code>.</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/07/03/decorator-in-ES7/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
+        <p>先看一下ES6下class被babel转义的情景。</p>
       
     </div>
 
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
 
+  <div class="article-footer">
+    <div class="article-meta pull-left">
 
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/19/zepto源码/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jiang jialin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="时光之旅">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/19/zepto源码/" class="post-title-link" itemprop="url">zepto 框架结构</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-02-19 17:29:33" itemprop="dateCreated datePublished" datetime="2019-02-19T17:29:33+08:00">2019-02-19</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-20 18:21:33" itemprop="dateModified" datetime="2019-07-20T18:21:33+08:00">2019-07-20</time>
-              </span>
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
 
-      
-      
-
-      
-        
-          <p>目前来说，zepto也属于过气网红了，但还有没有学习的必要呢？答案是肯定的，见贤思齐焉，见不贤而内自省也，见代码亦是如此。可能在业务上用不到zepto，但其架构实现方式以及具体api的实现方式，还是可以给我们带来参考。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/02/19/zepto源码/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
     </div>
 
     
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
+</article>
 
 
+
+  <article>
+
+  
     
-      
-
+    <h3 class="article-title"><a href="/2019/07/03/decorator-in-ES7/"><span>decorator in ES7</span></a></h3>
+    
   
 
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/19/my-promise/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jiang jialin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/07/03/decorator-in-ES7/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-07-03T02:46:13.000Z">
+          2019-07-03
+        </time>
+      </a>
     </span>
+  </div>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="时光之旅">
-    </span>
 
-    
-      <header class="post-header">
+  
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/19/my-promise/" class="post-title-link" itemprop="url">实现简易promise</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-02-19 16:29:32" itemprop="dateCreated datePublished" datetime="2019-02-19T16:29:32+08:00">2019-02-19</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-20 18:21:33" itemprop="dateModified" datetime="2019-07-20T18:21:33+08:00">2019-07-20</time>
-              </span>
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+  <div class="article-content">
+    <div class="entry">
       
-      
-
-      
-        
-          <p>此文将分步实现简易promise。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/02/19/my-promise/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
+        <h2 id="1-decorator是什么"><a href="#1-decorator是什么" class="headerlink" title="1 decorator是什么"></a>1 decorator是什么</h2><p>装饰器，顾名思义，就是用一段代码包裹另一段代码，类似于<code>函数组装(functional composition)</code>或<code>高阶函数(higher-order functions)</code>.</p>
       
     </div>
 
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
 
+  <div class="article-footer">
+    <div class="article-meta pull-left">
 
     
-      
 
-  
+    
+    
 
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/07/HTTP-缓存/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jiang jialin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/javascript/">javascript</a>
     </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="时光之旅">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/11/07/HTTP-缓存/" class="post-title-link" itemprop="url">HTTP 缓存</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-07 15:25:53" itemprop="dateCreated datePublished" datetime="2018-11-07T15:25:53+08:00">2018-11-07</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-20 18:21:33" itemprop="dateModified" datetime="2019-07-20T18:21:33+08:00">2019-07-20</time>
-              </span>
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最近学习pwa，了解了server worker的缓存能力，但对于HTTP缓存还是一知半解，借此机会学习并记录。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/11/07/HTTP-缓存/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
     </div>
 
     
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
+</article>
 
 
+
+  <article>
+
+  
     
-      
-
+    <h3 class="article-title"><a href="/2019/02/19/zepto源码/"><span>zepto 框架结构</span></a></h3>
+    
   
 
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/css与js对浏览器渲染的影响/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jiang jialin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/02/19/zepto源码/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-02-19T09:29:33.000Z">
+          2019-02-19
+        </time>
+      </a>
     </span>
+  </div>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="时光之旅">
-    </span>
 
-    
-      <header class="post-header">
+  
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/11/01/css与js对浏览器渲染的影响/" class="post-title-link" itemprop="url">css与js对浏览器渲染的影响</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-01 14:28:02" itemprop="dateCreated datePublished" datetime="2018-11-01T14:28:02+08:00">2018-11-01</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-20 18:21:33" itemprop="dateModified" datetime="2019-07-20T18:21:33+08:00">2019-07-20</time>
-              </span>
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+  <div class="article-content">
+    <div class="entry">
       
-      
-
-      
-        
-          <p>最近学习了一下浏览器从收HTML文档到渲染出页面的过程，在此做一下记录。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/11/01/css与js对浏览器渲染的影响/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
+        <p>目前来说，zepto也属于过气网红了，但还有没有学习的必要呢？答案是肯定的，见贤思齐焉，见不贤而内自省也，见代码亦是如此。可能在业务上用不到zepto，但其架构实现方式以及具体api的实现方式，还是可以给我们带来参考。</p>
       
     </div>
 
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
 
+  <div class="article-footer">
+    <div class="article-meta pull-left">
 
     
-      
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
 
   
-
-  
-  
-  
-
+    
+    <h3 class="article-title"><a href="/2019/02/19/my-promise/"><span>实现简易promise</span></a></h3>
+    
   
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/13/你不知道的javascript（上卷）读书笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jiang jialin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/02/19/my-promise/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-02-19T08:29:32.000Z">
+          2019-02-19
+        </time>
+      </a>
     </span>
+  </div>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="时光之旅">
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>此文将分步实现简易promise。</p>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/javascript/">javascript</a>
     </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/09/13/你不知道的javascript（上卷）读书笔记/" class="post-title-link" itemprop="url">《你不知道的javascript（上卷）》读书笔记</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-09-13 19:27:29" itemprop="dateCreated datePublished" datetime="2018-09-13T19:27:29+08:00">2018-09-13</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-20 18:21:33" itemprop="dateModified" datetime="2019-07-20T18:21:33+08:00">2019-07-20</time>
-              </span>
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+    </div>
 
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2018/11/07/HTTP-缓存/"><span>HTTP 缓存</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/11/07/HTTP-缓存/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-11-07T07:25:53.000Z">
+          2018-11-07
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
       
+        <p>最近学习pwa，了解了server worker的缓存能力，但对于HTTP缓存还是一知半解，借此机会学习并记录。</p>
       
+    </div>
 
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/http缓存/">http缓存</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2018/11/01/css与js对浏览器渲染的影响/"><span>css与js对浏览器渲染的影响</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/11/01/css与js对浏览器渲染的影响/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-11-01T06:28:02.000Z">
+          2018-11-01
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
       
-        
-          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对《你不知道的javascript（上卷）》的整理，将重要的知识点进行记录，对一部分知识点进行扩展延伸。</p>
+        <p>最近学习了一下浏览器从收HTML文档到渲染出页面的过程，在此做一下记录。</p>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/浏览器渲染相关/">浏览器渲染相关</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2018/09/13/你不知道的javascript（上卷）读书笔记/"><span>《你不知道的javascript（上卷）》读书笔记</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/09/13/你不知道的javascript（上卷）读书笔记/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-09-13T11:27:29.000Z">
+          2018-09-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对《你不知道的javascript（上卷）》的整理，将重要的知识点进行记录，对一部分知识点进行扩展延伸。</p>
 <p>最后编辑时间：2018-9-19</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/09/13/你不知道的javascript（上卷）读书笔记/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
       
     </div>
 
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/14/this-is-us/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jiang jialin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="时光之旅">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/04/14/this-is-us/" class="post-title-link" itemprop="url">this is us</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-04-14 22:21:40 / 修改时间：22:21:41" itemprop="dateCreated datePublished" datetime="2018-04-14T22:21:40+08:00">2018-04-14</time>
-            </span>
-          
-
-          
-            
-
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/25/第一篇博客/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jiang jialin">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="时光之旅">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/03/25/第一篇博客/" class="post-title-link" itemprop="url">开篇宣言</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-03-25 22:18:01" itemprop="dateCreated datePublished" datetime="2018-03-25T22:18:01+08:00">2018-03-25</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-20 18:21:33" itemprop="dateModified" datetime="2019-07-20T18:21:33+08:00">2019-07-20</time>
-              </span>
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h1><p>先以一段朱自清的《匆匆》开头吧：</p>
-<p><code>洗手的时候，日子从水盆里过去；吃饭的时候，日子从饭碗里过去；默默时，便从凝然的双眼前过去。我觉察他去的匆匆了，伸出手遮挽时，他又从遮挽着的手边过去，天黑时，我躺在床上，他便伶伶俐俐地从我身上跨过，从我脚边飞去了。</code></p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/03/25/第一篇博客/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
   </div>
 
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
-
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  
-  <p class="site-author-name" itemprop="name">Jiang jialin</p>
-  <div class="site-description motion-element" itemprop="description"></div>
-</div>
-
-
-  <nav class="site-state motion-element">
-    
-      <div class="site-state-item site-state-posts">
-        
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">11</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-    
+  <div class="article-footer">
+    <div class="article-meta pull-left">
 
     
 
     
-      
-      
-      <div class="site-state-item site-state-tags">
-        
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">4</span>
-        <span class="site-state-item-name">标签</span>
-        
-      </div>
     
-  </nav>
 
-
-
-
-
-
-
-
-
-
-
-
-
-          
-          
-        </div>
-      </div>
-
-      
-
-      
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/读书笔记/">读书笔记</a>
+    </span>
+    
 
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
+
+    
+  </div>
+</article>
 
 
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2018/04/14/this-is-us/"><span>this is us</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/04/14/this-is-us/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-04-14T14:21:40.000Z">
+          2018-04-14
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
         
-      </div>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+
+<nav class="pagination">
+  
+  
+  <a href="/page/2/" class="pagination-next">下一页</a>
+  
+</nav>
     </main>
 
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Jiang jialin</span>
-
-  
-
-  
-</div>
-
-
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.2.0</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
     
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
+    &copy; 2019 Jiang jialin
     
-
-    
-
+  </p>
+</footer>
     
   </div>
-
-  
-
-<script>
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script src="/lib/jquery/index.js?v=3.4.1"></script>
-
-  
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-
-
-
-  <script src="/js/utils.js?v=7.2.0"></script>
-
-  <script src="/js/motion.js?v=7.2.0"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/schemes/muse.js?v=7.2.0"></script>
-
-
-
-
-  
-
-  <script src="/js/next-boot.js?v=7.2.0"></script>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-
-  
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
+</div>
 </body>
 </html>

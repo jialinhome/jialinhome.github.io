@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>Array.reduce | 时光之旅 | time line</title>
+
+  
+  <meta name="author" content="Jiang jialin">
+  
+
+  
+  <meta name="description" content="前言话说这个Array.reduce，真的是一生之敌，不经常用，用到的时候就忘了，还有Array.splice、Array.slice，这些函数的功能都比较容易记住，但里边回调函数的参数真的不太容易背下来，每次都要去看文档查询，所以还是在这里写一写，再次用到的时候来这里查。
+这个reduce只是一个壳，重要的是里边的回调函数，回调函数会对数组的每一项进行处理，然后汇总成一个值返回。">
+  
+
+  
+  
+  <meta name="keywords" content="javascript">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Array.reduce">
+
+  <meta property="og:site_name" content="时光之旅">
+
+  
+  <meta property="og:image" content="/favicon.ico">
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="时光之旅" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">时光之旅</a>
+    </h1>
+    <p class="site-description">time line</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>Array.reduce</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/07/30/Array-reduce/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-07-30T03:28:23.000Z">
+          2019-07-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>话说这个<code>Array.reduce</code>，真的是一生之敌，不经常用，用到的时候就忘了，还有<code>Array.splice</code>、<code>Array.slice</code>，这些函数的功能都比较容易记住，但里边回调函数的参数真的不太容易背下来，每次都要去看文档查询，所以还是在这里写一写，再次用到的时候来这里查。</p>
+<p>这个<code>reduce</code>只是一个壳，重要的是里边的回调函数，回调函数会对数组的每一项进行处理，然后汇总成一个值返回。</p>
+<a id="more"></a>
+
+<h2 id="reduce的语法"><a href="#reduce的语法" class="headerlink" title="reduce的语法"></a><code>reduce</code>的语法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.reduce(callback(accumulator, currentValue[, currentIndex[, array]])[, initialValue])</span><br></pre></td></tr></table></figure>
+
+<h2 id="reduce接受两个参数"><a href="#reduce接受两个参数" class="headerlink" title="reduce接受两个参数"></a><code>reduce</code>接受两个参数</h2><ul>
+<li><code>callback</code> 回调函数</li>
+<li><code>initialValue</code> 初始值–可选</li>
+</ul>
+<h2 id="回调函数的四个参数"><a href="#回调函数的四个参数" class="headerlink" title="回调函数的四个参数"></a>回调函数的四个参数</h2><ul>
+<li><code>accumulator</code> 累加器</li>
+<li><code>currentValue</code> 当前值</li>
+<li><code>currentIndex</code> 当前索引</li>
+<li><code>array</code> 所处理的数组</li>
+</ul>
+<h2 id="回调函数的执行过程"><a href="#回调函数的执行过程" class="headerlink" title="回调函数的执行过程"></a>回调函数的执行过程</h2><p>第一次执行：</p>
+<ul>
+<li><p>如果提供了<code>initialValue</code></p>
+<p><code>accumulator</code>取<code>initialValue</code></p>
+<p><code>currentValue</code>取数组中第一个值</p>
+<p><code>currentIndex</code>取<code>0</code></p>
+<p>如果数组为空，直接返回，不执行回调函数</p>
+</li>
+<li><p>如果没有提供<code>initialValue</code></p>
+<p><code>accumulator</code>取数组中第一个值</p>
+<p><code>currentValue</code>取数组中第二个值</p>
+<p><code>currentIndex</code>取<code>1</code></p>
+<p>如果数组为空，会报错</p>
+</li>
+</ul>
+<p>继续执行：</p>
+<p>  <code>accumulator</code>取累加器回调的返回值，也就是<code>callback</code>中<code>return</code>回来的那个值，它是上一次调用回调的时候的累积值。</p>
+<p>  <code>currentValue</code>与<code>currentIndex</code>依次取对应的值。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>数组求和：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> accu = arr.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">accumulator, currentValue</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> accumulator + currentValue;</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line"><span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
+
+<p>二维数组转一维：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> flattened = [[<span class="number">0</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>]].reduce(</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.concat(b);</span><br><span class="line">  &#125;, []);</span><br><span class="line"><span class="comment">// flattened is [0, 1, 2, 3, 4, 5]</span></span><br></pre></td></tr></table></figure>
+
+<p>数组去重：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">4</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> res = arr.sort().reduce(<span class="function">(<span class="params">accumulator, currentValue</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (accumulator.length === <span class="number">0</span> || accumulator[accumulator.length - <span class="number">1</span>] !== currentValue) &#123;</span><br><span class="line">    accumulator.push(currentValue);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> accumulator;</span><br><span class="line">&#125;, [])</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce" target="_blank" rel="noopener">MDN-array</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/javascript/">javascript</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2019 Jiang jialin
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
