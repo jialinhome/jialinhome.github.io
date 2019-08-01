@@ -34,6 +34,26 @@
   <link href="/favicon.ico" rel="icon">
   <link rel="alternate" href="/atom.xml" title="时光之旅" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!-- 引入图片放大 -->
+  <link href="/js/viewer.css" rel="stylesheet">
+  <script src="/js/viewer.js"></script>
+  <script>
+    window.addEventListener('load', function () {
+      var imgs = document.querySelector('.article-content').querySelectorAll('img');
+      console.log(imgs);
+      // View an image
+      Array.prototype.slice.call(imgs).forEach(function(item) {
+        var imgSrc = item.getAttribute('src');
+        item.addEventListener('click', function () {
+          const viewer = new Viewer(item, {
+            viewed() {
+              viewer.zoomTo(1);
+            },
+          });
+        });
+      })
+    });
+  </script>
 </head>
 
 

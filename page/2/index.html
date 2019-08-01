@@ -28,6 +28,26 @@
   <link href="/favicon.ico" rel="icon">
   <link rel="alternate" href="/atom.xml" title="时光之旅" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!-- 引入图片放大 -->
+  <link href="/js/viewer.css" rel="stylesheet">
+  <script src="/js/viewer.js"></script>
+  <script>
+    window.addEventListener('load', function () {
+      var imgs = document.querySelector('.article-content').querySelectorAll('img');
+      console.log(imgs);
+      // View an image
+      Array.prototype.slice.call(imgs).forEach(function(item) {
+        var imgSrc = item.getAttribute('src');
+        item.addEventListener('click', function () {
+          const viewer = new Viewer(item, {
+            viewed() {
+              viewer.zoomTo(1);
+            },
+          });
+        });
+      })
+    });
+  </script>
 </head>
 
 
@@ -55,6 +75,59 @@
 
     <main class="site-main posts-loop">
     
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2018/09/13/你不知道的javascript（上卷）读书笔记/"><span>《你不知道的javascript（上卷）》读书笔记</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/09/13/你不知道的javascript（上卷）读书笔记/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-09-13T11:27:29.000Z">
+          2018-09-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对《你不知道的javascript（上卷）》的整理，将重要的知识点进行记录，对一部分知识点进行扩展延伸。</p>
+<p>最后编辑时间：2018-9-19</p>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/读书笔记/">读书笔记</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
   <article>
 
   

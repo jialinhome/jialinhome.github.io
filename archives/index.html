@@ -28,6 +28,26 @@
   <link href="/favicon.ico" rel="icon">
   <link rel="alternate" href="/atom.xml" title="时光之旅" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!-- 引入图片放大 -->
+  <link href="/js/viewer.css" rel="stylesheet">
+  <script src="/js/viewer.js"></script>
+  <script>
+    window.addEventListener('load', function () {
+      var imgs = document.querySelector('.article-content').querySelectorAll('img');
+      console.log(imgs);
+      // View an image
+      Array.prototype.slice.call(imgs).forEach(function(item) {
+        var imgSrc = item.getAttribute('src');
+        item.addEventListener('click', function () {
+          const viewer = new Viewer(item, {
+            viewed() {
+              viewer.zoomTo(1);
+            },
+          });
+        });
+      })
+    });
+  </script>
 </head>
 
 
@@ -61,6 +81,17 @@
   <h2 class="article-title ">归档</h2>
 
   <div class="archive">
+    
+      <div class="post archive">
+        <div class="archive-post">
+          <time datetime="2019-07-31T06:33:19.000Z">
+            <a href="/2019/07/31/动态规划/">2019-07-31</a>
+          </time>
+          
+            <h3 class="archive-title"><a href="/2019/07/31/动态规划/"><span>动态规划</span></a></h3>
+          
+        </div>
+      </div>
     
       <div class="post archive">
         <div class="archive-post">
@@ -157,17 +188,6 @@
           </time>
           
             <h3 class="archive-title"><a href="/2018/11/01/css与js对浏览器渲染的影响/"><span>css与js对浏览器渲染的影响</span></a></h3>
-          
-        </div>
-      </div>
-    
-      <div class="post archive">
-        <div class="archive-post">
-          <time datetime="2018-09-13T11:27:29.000Z">
-            <a href="/2018/09/13/你不知道的javascript（上卷）读书笔记/">2018-09-13</a>
-          </time>
-          
-            <h3 class="archive-title"><a href="/2018/09/13/你不知道的javascript（上卷）读书笔记/"><span>《你不知道的javascript（上卷）》读书笔记</span></a></h3>
           
         </div>
       </div>

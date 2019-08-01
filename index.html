@@ -28,6 +28,26 @@
   <link href="/favicon.ico" rel="icon">
   <link rel="alternate" href="/atom.xml" title="时光之旅" type="application/atom+xml">
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!-- 引入图片放大 -->
+  <link href="/js/viewer.css" rel="stylesheet">
+  <script src="/js/viewer.js"></script>
+  <script>
+    window.addEventListener('load', function () {
+      var imgs = document.querySelector('.article-content').querySelectorAll('img');
+      console.log(imgs);
+      // View an image
+      Array.prototype.slice.call(imgs).forEach(function(item) {
+        var imgSrc = item.getAttribute('src');
+        item.addEventListener('click', function () {
+          const viewer = new Viewer(item, {
+            viewed() {
+              viewer.zoomTo(1);
+            },
+          });
+        });
+      })
+    });
+  </script>
 </head>
 
 
@@ -55,6 +75,58 @@
 
     <main class="site-main posts-loop">
     
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2019/07/31/动态规划/"><span>动态规划</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/07/31/动态规划/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-07-31T06:33:19.000Z">
+          2019-07-31
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>];</span><br><span class="line"><span class="keyword">let</span> n = p.length;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cutRod</span>(<span class="params">p, n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  q = -<span class="built_in">Number</span>.MAX_VALUE;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    q = <span class="built_in">Math</span>.max(q, p[i] + cutRod(p, n - i));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> q;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/javascript-算法/">javascript, 算法</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
   <article>
 
   
@@ -504,59 +576,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/浏览器渲染相关/">浏览器渲染相关</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2018/09/13/你不知道的javascript（上卷）读书笔记/"><span>《你不知道的javascript（上卷）》读书笔记</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/09/13/你不知道的javascript（上卷）读书笔记/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-09-13T11:27:29.000Z">
-          2018-09-13
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>对《你不知道的javascript（上卷）》的整理，将重要的知识点进行记录，对一部分知识点进行扩展延伸。</p>
-<p>最后编辑时间：2018-9-19</p>
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/读书笔记/">读书笔记</a>
     </span>
     
 
